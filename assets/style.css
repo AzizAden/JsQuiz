@@ -1,55 +1,81 @@
+/* Reset default styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
-  
-  #quiz {
-    text-align: center;
-  }
-  
-  .start-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .start-container h1 {
-    margin-bottom: 20px;
-  }
-  
-  .start-container button {
-    padding: 10px 20px;
-    font-size: 18px;
-  }
-  
-  .question-container {
-    margin-bottom: 20px;
-  }
-  
-  .hide {
-    display: none;
-  }
-  
-  .timer-container {
-    margin-top: 20px;
-  }
-  
-  .choices a {
-    display: block;
-    margin: 10px 0;
-    padding: 10px;
-    background-color: #eee;
-    text-decoration: none;
-    color: #333;
-    transition: background-color 0.3s;
-  }
-  
-  .choices a:hover {
-    background-color: #ccc;
-  }
-  
+  font-family: Arial, sans-serif;
+  background-color: #f2f2f2;
+}
+
+#quiz {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.start-container {
+  text-align: center;
+}
+
+.start-container h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333333;
+}
+
+.start-container button {
+  font-size: 16px;
+  padding: 10px 20px;
+  background-color: #9370DB;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.question-container {
+  text-align: center;
+}
+
+.question-container h2 {
+  font-size: 20px;
+  margin-bottom: 20px;
+  color: #333333;
+}
+
+.choices {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.choices a {
+  font-size: 16px;
+  padding: 10px 20px;
+  margin-bottom: 10px;
+  background-color: #DDA0DD;
+  color: #ffffff;
+  text-decoration: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.choices a:hover {
+  background-color: #9932CC;
+}
+
+.timer-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.timer-container p {
+  font-size: 16px;
+  color: #333333;
+}
