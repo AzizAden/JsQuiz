@@ -5,14 +5,14 @@ const answerEls = document.querySelectorAll('.choices a');
 let score = 0;
 const questionsAndAnswers = [
   {
-    question: "Var, let, and const are all examples of what?",
-    choices: ["Functions", "Arrays", "Variables", "HTML Elements"],
-    answer: "Variables"
+    question: "Commonly used datatypes do not include?",
+    choices: ["numbers", "alerts", "strings", "boleans"],
+    answer: "boleans"
   },
   {
-    question: "In what specific way should our lines of code be written in?",
-    choices: ["Camel case", "Lowercase", "With plenty of space", "In cascading style"],
-    answer: "Camel case"
+    question: "What year was Javascript released?",
+    choices: ["1996", "2009", "1999", "1982"],
+    answer: "1996"
   },
   {
     question: "What is used to store multiple values in JavaScript?",
@@ -20,29 +20,24 @@ const questionsAndAnswers = [
     answer: "Arrays"
   },
   {
-    question: "A set of statements that performs a task is called what?",
-    choices: ["Function", "Variable", "Global tag", "Array"],
-    answer: "Function"
+    question: "A very useful tool used during development and debugging for printing content to the debugger is:",
+    choices: ["Javascript", "terminal", "for loops", "console.log"],
+    answer: "for loops"
   },
   {
     question: "Who is the creator of JavaScript?",
-    choices: ["Gabe Newell", "Brendan Eich", "Bill Gates", "Friedrich Java"],
+    choices: ["Isaac Newton", "Brendan Eich", "Kanye West", "Paul Bunyan"],
     answer: "Brendan Eich"
   }
 ];
 let currentIndex = 0;
 let secondsLeft = 60;
-let quizFinished = false;
 
 function startQuiz() {
   const startEl = document.getElementById("start");
   startEl.classList.add("hide");
   questionEl.classList.remove("hide");
   timeEl.classList.remove("hide");
-  score = 0;
-  currentIndex = 0;
-  secondsLeft = 60;
-  quizFinished = false;
   startTimer();
   showQuestion();
   showChoices();
@@ -52,10 +47,6 @@ function startQuiz() {
 }
 
 function onAnswer(e) {
-  if (quizFinished) {
-    return;
-  }
-
   const selectedAnswer = e.target.textContent;
   const currentQuestion = questionsAndAnswers[currentIndex];
   
@@ -108,21 +99,6 @@ function endQuiz() {
   const result = document.createElement("h2");
   result.textContent = `You scored ${score} out of ${questionsAndAnswers.length} correct!`;
   document.getElementById("quiz").appendChild(result);
-
-  const restartBtn = document.createElement("button");
-  restartBtn.textContent = "Restart Quiz";
-  restartBtn.addEventListener("click", restartQuiz);
-  document.getElementById("quiz").appendChild(restartBtn);
-
-  quizFinished = true;
-}
-
-function restartQuiz() {
-  const result = document.querySelector("h2");
-  const restartBtn = document.querySelector("button");
-  result.remove();
-  restartBtn.remove();
-  startQuiz();
 }
 
 startBtnEl.addEventListener("click", startQuiz);
