@@ -1,10 +1,9 @@
-var startBtnEl = document.getElementById("startBtn");
-var questionEl = document.getElementById("question");
-var startEl = document.getElementById("start");
-var timeEl = document.getElementById('timeLeft');
-var answerEls = document.querySelectorAll('.choices a');
-var score = 0;
-var questionsAndAnswers = [
+const startBtnEl = document.getElementById("startBtn");
+const questionEl = document.getElementById("question");
+const timeEl = document.getElementById('timeLeft');
+const answerEls = document.querySelectorAll('.choices a');
+let score = 0;
+const questionsAndAnswers = [
   {
     question: "Var, let, and const are all examples of what?",
     choices: ["Functions", "Arrays", "Variables", "HTML Elements"],
@@ -31,23 +30,34 @@ var questionsAndAnswers = [
     answer: "Brendan Eich"
   }
 ];
-var currentIndex = 0;
+let currentIndex = 0;
+let secondsLeft = 60;
+let quizFinished = false;
 
 function startQuiz() {
+  const startEl = document.getElementById("start");
   startEl.classList.add("hide");
   questionEl.classList.remove("hide");
   timeEl.classList.remove("hide");
+  score = 0;
+  currentIndex = 0;
+  secondsLeft = 60;
+  quizFinished = false;
   startTimer();
   showQuestion();
   showChoices();
-  answerEls.forEach(function(answerEl) {
+  answerEls.forEach((answerEl) => {
     answerEl.addEventListener('click', onAnswer);
   });
 }
 
 function onAnswer(e) {
-  var selectedAnswer = e.target.textContent;
-  var currentQuestion = questionsAndAnswers[currentIndex];
+  if (quizFinished) {
+    return;
+  }
+
+  const selectedAnswer = e.target.textContent;
+  const currentQuestion = questionsAndAnswers[currentIndex];
   
   if (selectedAnswer === currentQuestion.answer) {
     score++;
@@ -67,9 +77,7 @@ function onAnswer(e) {
 }
 
 function startTimer() {
-  var secondsLeft = 60;
-
-  var timerInterval = setInterval(function() {
+  const timerInterval = setInterval(() => {
     secondsLeft--;
     timeEl.textContent = secondsLeft + " seconds left";
 
@@ -85,10 +93,10 @@ function showQuestion() {
 }
 
 function showChoices() {
-  var choices = questionsAndAnswers[currentIndex].choices;
-  var choiceEls = document.querySelectorAll('.choices a');
+  const choices = questionsAndAnswers[currentIndex].choices;
+  const choiceEls = document.querySelectorAll('.choices a');
 
-  choiceEls.forEach(function(choiceEl, index) {
+  choiceEls.forEach((choiceEl, index) => {
     choiceEl.textContent = choices[index];
   });
 }
@@ -97,9 +105,24 @@ function endQuiz() {
   questionEl.classList.add("hide");
   timeEl.classList.add("hide");
 
-  var result = document.createElement("h2");
-  result.textContent = "You scored " + score + " out of " + questionsAndAnswers.length + " correct!";
+  const result = document.createElement("h2");
+  result.textContent = `You scored ${score} out of ${questionsAndAnswers.length} correct!`;
   document.getElementById("quiz").appendChild(result);
+
+  const restartBtn = document.createElement("button");
+  restartBtn.textContent = "Restart Quiz";
+  restartBtn.addEventListener("click", restartQuiz);
+  document.getElementById("quiz").appendChild(restartBtn);
+
+  quizFinished = true;
+}
+
+function restartQuiz() {
+  const result = document.querySelector("h2");
+  const restartBtn = document.querySelector("button");
+  result.remove();
+  restartBtn.remove();
+  startQuiz();
 }
 
 startBtnEl.addEventListener("click", startQuiz);
